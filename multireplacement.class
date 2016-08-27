@@ -42,7 +42,6 @@ How it works:
 	
 	
 	for (int i = 0; i < number; ++i){
-	        for (int i = 0; i < number; ++i){
             move();
         }
 	^ This creates a for loop that repeats the command within it (in this case move();) as many times as the number parameter (in this case 4).
