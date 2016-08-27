@@ -1,0 +1,53 @@
+//Coded by Abdullah Akbar for his St. Mark's Computer Science class
+
+/*
+to use these functions, copy the part below.
+*/
+
+//Copy this part:
+
+    public void moveSpaces(number){
+        for (int i = 0; i < number; ++i){
+            move();
+        }
+    }
+    public void turnSpaces(number){
+        for (int i = 0; i < number; ++i){
+            turnLeft();
+        }
+    }
+	
+/*Then, instead of having to type move(); or turnLeft(); multiple times, you can just do moveSpaces(numberOfSpaces); or turnSpaces(numberOfTurns);
+
+E.G.
+
+instead of:
+move();
+move();
+move();
+move();
+
+to move 4 times, you could do:
+
+moveSpaces(4);
+
+the same holds true for turnSpaces
+
+
+
+How it works:
+	public void moveSpaces(number){
+	}
+	^ This creates the method named moveSpaces.(number) is what we call a parameter. For example, when you type moveSpaces(4); the method replaces number with 4.
+	
+	
+	for (int i = 0; i < number; ++i){
+	        for (int i = 0; i < number; ++i){
+            move();
+        }
+	^ This creates a for loop that repeats the command within it (in this case move();) as many times as the number parameter (in this case 4).
+	
+	
+Got any questions? Feel free to email me @ 18akbara@smtexas.org
+
+*/
