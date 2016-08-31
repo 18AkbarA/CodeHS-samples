@@ -1,0 +1,86 @@
+//Coded by Abdullah Akbar for his SM compsci class
+
+
+//Copy the following class into your code. Code with explanatory comments is below.
+public class RandomHurdles extends SuperKarel
+{
+    
+    private void jumpHurdle(){
+        turnRight();
+        move();
+        turnRight();
+        move();
+        turnLeft();
+        
+    }
+    public void run()
+    {
+
+        while(facingEast()){
+            if(frontIsBlocked()){
+                turnLeft();
+                move();
+                if(rightIsBlocked()){
+                    turnAround();
+                    move();
+                     turnLeft();
+                     break;
+                }
+                else{
+                    jumpHurdle();
+                }
+            }
+            if(frontIsClear()){
+                move();
+            }
+        }
+
+    }
+}
+
+
+
+
+
+//Code with explanations:
+
+public class RandomHurdles extends SuperKarel
+{
+    //Method to make Karel jump the hurdles.
+    private void jumpHurdle(){
+        turnRight();
+        move();
+        turnRight();
+        move();
+        turnLeft();
+        
+    }
+    public void run()
+    {
+		//While Karel's facing east, he's looking forwards
+        while(facingEast()){
+		//if his front is blocked, he's either facing a hurdle or the end wall
+            if(frontIsBlocked()){
+                turnLeft();
+                move();
+                if(rightIsBlocked()){
+				//Karel has reached the end; lets put him into the finishing position.
+                    turnAround();
+                    move();
+                     turnLeft();
+                     break;
+                }
+                else{
+				//otherwise jump the hurdle.
+                    jumpHurdle();
+                }
+            }
+			
+            if(frontIsClear()){
+			//This just moves karel forwards when his front is clear
+                move();
+            }
+        }
+
+    }
+}
