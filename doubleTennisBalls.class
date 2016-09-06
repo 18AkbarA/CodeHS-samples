@@ -1,0 +1,27 @@
+//Made by Abdullah Akbar for his compsci class.
+//I'll comment this file later
+
+public class DoubleTennisBallsKarel extends SuperKarel
+{
+    public void run()
+    {
+        int original = 0;
+        move();
+        while(ballsPresent()){
+            takeBall();
+            original = original + 1;
+            int newnumbah = original * 2;
+        }
+        doNumbah(newnumbah);
+    }
+    
+    public void doNumbah(thenumb){
+        
+        for(int i = 0; i < thenumb; i++){
+            putBall();
+        }
+        turnAround();
+        move();
+        turnAround();
+    }
+}
