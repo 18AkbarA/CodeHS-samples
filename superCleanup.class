@@ -1,0 +1,65 @@
+//Made by Abdullah Akbar for his compsci class.
+//I'll comment this when I get the time.
+
+public class SuperCleanupKarel extends SuperKarel
+{
+    public void run()
+    {
+        while(notFacingSouth()){
+
+            tester();
+            if(frontIsBlocked()){
+                
+                turnLeft();
+                while(frontIsClear()){
+                    tester();
+                    move();
+                }
+                
+            }
+	        else if(frontIsClear()){
+	            tester();
+			    move();
+			    if(frontIsBlocked()){
+					tester();
+	            if(facingEast()){
+	                tester();
+	                if(leftIsBlocked()){
+	                }  
+	                else{
+	                  turnLeft();
+	                  move();
+	                  turnLeft();
+	                }
+	            }
+	            else if(facingWest()){
+	                tester();
+	                
+	                if(rightIsBlocked()){
+	                }  
+	                else{
+	                  turnRight();
+	                  move();
+	                  turnRight();
+	                }
+	            }
+	            }
+	            
+			}
+
+	   }
+
+
+
+	    
+
+        }
+        
+        public void tester(){
+            if(ballsPresent()){
+                takeBall();
+            }
+        }
+    
+    
+}
