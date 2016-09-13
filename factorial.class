@@ -1,0 +1,18 @@
+//Written by Abdullah Akbar for his compsci class
+
+public class Factorial extends ConsoleProgram
+{
+    public void run()
+    {
+        int whatnumb = readInt("What number would you like to compute the factorial for?");
+        int firstnumb = whatnumb;
+        for (int i = whatnumb; i >= 1; i--){
+            whatnumb = whatnumb * i;
+        }
+        System.out.println(whatnumb / firstnumb);
+    }
+}
+
+
+
+325x638

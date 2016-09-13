@@ -1,0 +1,24 @@
+//Written by Abdullah Akbar for his compsci class
+
+public class GuessTheNumber extends ConsoleProgram
+{
+    public void run()
+    {
+        int secretNumber = 6;
+        
+        // Allow the user to keep guessing numbers between
+        // 1 and 10 until they guess the correct number
+        
+        // Write your code here!
+        System.out.println("I'm thinking of a number");
+        System.out.println("see if u can guess it");
+        int guessedint = readInt("Guess :");
+        
+        while(guessedint != secretNumber){
+            System.out.println("try again!");
+            guessedint = readInt("Guess :");
+        }
+            System.out.println("correct!");
+        
+    }
+}

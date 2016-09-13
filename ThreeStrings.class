@@ -1,0 +1,21 @@
+//Written by Abdullah Akbar for his compsci class
+
+public class ThreeStrings extends ConsoleProgram
+{
+    public void run()
+    {
+       String firstString = readLine("First string? ");
+       String secondString = readLine("Second string? ");
+        String thirdString = readLine("Third string? ");
+        
+        String newString = firstString + secondString;
+        if (newString.equals(thirdString)){
+            System.out.println(firstString + " + " + secondString + " is equal to " + thirdString + "!");
+            
+        }
+        else{
+           System.out.println(firstString + " + " + secondString + " is not equal to " + thirdString + "!"); 
+        }
+        
+    }
+}

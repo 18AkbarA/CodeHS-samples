@@ -1,0 +1,29 @@
+public class Poetry extends ConsoleProgram
+{
+    public void run()
+    {
+        Boolean wantHaiku = readBoolean("Wanna hear a haiku?");
+        Boolean wantAcrostic = readBoolean("Wanna hear an acrostic?");
+        if (wantHaiku == true){
+            showHaiku();
+        }
+        if(wantAcrostic == true){
+            showAcrostic();
+        }
+    }
+    
+    public void showHaiku(){
+        System.out.println("I am true og");
+        System.out.println("Unlike my foolish homies");
+        System.out.println("Who wish they were me");
+    }
+        public void showAcrostic(){
+        System.out.println("wassdat?");
+        System.out.println("actually tho");
+        System.out.println("what is it?");
+        System.out.println("I wanna know");
+        System.out.println("plztell");
+    }
+
+}
+
