@@ -1,0 +1,20 @@
+//written by Abdullah Akbar for his compsci class
+
+public String doubleVowel(String str)
+{
+    
+    String finalstring = "";
+    int stringlength = str.length();
+    
+    for (int i =0; i < stringlength; i++){
+        char stringchar = str.charAt(i);
+        if (stringchar == 'a' ||stringchar == 'e' || stringchar == 'i' || stringchar == 'o' || stringchar == 'u'){
+            finalstring = finalstring + Character.toString(stringchar) + Character.toString(stringchar);
+        }
+        else{
+            finalstring = finalstring + Character.toString(stringchar);
+        }
+    }
+    
+    return finalstring;
+}

@@ -1,0 +1,22 @@
+//written by Abdullah Akbar for his compsci class
+
+public String altCase(String text)
+{
+    int stringlength = text.length();
+    String laststring = "";
+    for (int  i = 0; i < stringlength; i++){
+        char stringchar = text.charAt(i);
+        String firstchar = Character.toString(stringchar);
+        String finalchar = firstchar.toLowerCase();
+        if((i % 2) == 0){
+            
+            finalchar = finalchar.toUpperCase();
+        }
+        
+        
+        
+        laststring += finalchar;
+        
+    }
+    return laststring;
+}

@@ -1,0 +1,25 @@
+//written by Abdullah Akbar for his compsci class
+
+public boolean allSameLetter(String str)
+{
+    int stringlength = str.length();
+    boolean allSame = true;
+    for (int  i = 0; i < stringlength; i++){
+        if (i == 0){
+        char stringchar = str.charAt(i);
+        }
+        else{
+            char stringchar = str.charAt(i);
+            char charbefore = str.charAt(i - 1);
+            if (stringchar == charbefore){
+                
+            }
+            else{
+                allSame = false;
+                break;
+            }
+        }
+        
+    }
+    return allSame;
+}

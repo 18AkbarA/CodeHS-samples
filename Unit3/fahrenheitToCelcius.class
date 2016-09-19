@@ -1,0 +1,16 @@
+/**
+ * what.
+ * Am I supposed to write a javadoc for this or something?
+ * whatevs.
+ * 
+ * */
+
+public double fahrenheitToCelsius(double degrees)
+{
+    double firstcalc = degrees - 32.0;
+    
+    double fahrenheit = (5.0/9.0) * firstcalc;
+    
+    return fahrenheit;
+
+}

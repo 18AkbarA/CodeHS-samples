@@ -1,0 +1,10 @@
+//written by Abdullah Akbar for his compsci class
+
+public int sumFrom(int a, int b)
+{
+    int newnumb = 0;
+    for (int x = a; x <= b; x++){
+         newnumb = newnumb + x;
+    }
+    return newnumb;
+}

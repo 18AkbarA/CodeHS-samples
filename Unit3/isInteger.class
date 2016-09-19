@@ -1,0 +1,27 @@
+public boolean isInteger(String str)
+{
+    
+    
+    int stringlength = str.length();
+    if (stringlength == 0){
+            return false;
+    }
+    else{
+        int starter = 0;
+    
+        for (int x = 0; x < stringlength; x++){
+            char stringchar = str.charAt(x);
+            if (Character.isDigit(stringchar)){
+                starter = starter + 1;
+            }
+        }
+    
+        if (starter == stringlength){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+}

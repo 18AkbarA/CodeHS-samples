@@ -1,0 +1,12 @@
+//written by Abdullah Akbar for his compsci class
+
+public String firstAndLast(String str)
+{
+    int stringlength = str.length() - 1;
+    char charone = str.charAt(0);
+    char charlast = str.charAt(stringlength);
+    String word = "" + charone + charlast;
+    
+    return word;
+
+}
