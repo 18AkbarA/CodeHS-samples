@@ -1,0 +1,38 @@
+//Written by Abdullah Akbar for his compsci class
+public class LongestStreak extends ConsoleProgram
+{
+    public static final int FLIPS = 100;
+     int heads = 0;
+    int tails = 0;
+    int longestheads = 0;
+    int longesttails = 0;
+    int newlongerheads = 0;
+    int newlongertails = 0;
+    public void run()
+    {
+        for (int i = 0; i < FLIPS; i++){
+        int random = Randomizer.nextInt(1,2);
+            if (random == 1){
+                newlongerheads = 0;
+                System.out.println("Tails");
+                tails++;
+                newlongertails++;
+                if (newlongertails > longesttails){
+                    longesttails = newlongertails;
+                }
+            }
+            else{
+                newlongertails = 0;
+                System.out.println("Heads");
+                heads++;
+                newlongerheads++;
+                if (newlongerheads > longestheads){
+                    longestheads = newlongerheads;
+                }
+            }
+        }
+        System.out.println("Longest streak of heads: " + longestheads);
+        //System.out.println("Longest streak of tails: " + longesttails);
+
+    }
+}

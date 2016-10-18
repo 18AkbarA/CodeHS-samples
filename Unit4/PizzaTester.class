@@ -1,0 +1,36 @@
+//Written by Abdullah Akbar for his Compsci class
+
+
+//Copy this part into PizzaTester.class
+public class PizzaTester extends ConsoleProgram
+{
+    public void run()
+    {
+        // Test your Pizza class here.
+        Pizza thisPizzaOne = new Pizza("Cheese","Anchovies",5);
+        System.out.println(thisPizzaOne);
+        Pizza thisPizzaTwo = new Pizza("Pepperoni","Anchovies",8);
+        System.out.println(thisPizzaTwo);
+        Pizza thisPizzaThree = new Pizza("barf","Anchovies",522);
+        System.out.println(thisPizzaThree);
+    }
+}
+
+
+//Copy this part into Pizza.class
+public class Pizza
+{
+    private static String type;
+    private static String topping;
+    private static int size;
+    
+    public Pizza(String theType,String theTopping, int theSize){
+        type = theType;
+        topping = theTopping;
+        size = theSize;
+    }
+    public String toString(){
+        return "Pizza with type " +type + " and toppings " + topping + " and size " + size;
+    }
+    // Write your class here!   
+}

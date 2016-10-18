@@ -1,0 +1,30 @@
+//Written by Abdullah Akbar for his compsci class
+public class CoinFlips extends ConsoleProgram
+{
+    public static final int FLIPS = 100;
+    
+    int heads = 0;
+    int tails = 0;
+    public void run()
+    {
+        for (int i = 0; i < FLIPS; i++){
+        int random = Randomizer.nextInt(1,2);
+            if (random == 1){
+                System.out.println("Tails");
+                tails++;
+            }
+            else{
+                System.out.println("Heads");
+                heads++;
+            }
+        }
+        
+        System.out.println("Heads: " +heads);
+        System.out.println("Tails: " +tails);
+        
+        System.out.println("% Heads: 0." + heads);
+        System.out.println("% Tails: 0." +tails);
+        
+        
+    }
+}
