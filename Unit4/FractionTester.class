@@ -1,0 +1,25 @@
+//Written by Abdullah for his compsci class
+public class FractionTester extends ConsoleProgram
+{
+    public void run()
+    {
+        // Test out your Fraction class here!
+        Fraction frac = new Fraction(1,2);
+        System.out.println(frac);
+        Fraction fracTwo = new Fraction(5,12);
+        System.out.println(fracTwo);
+    }
+}
+
+public class Fraction
+{
+       private static String stringedFrac;
+       
+       public Fraction(int theNum, int theDenom){
+            stringedFrac = Integer.toString(theNum) + "/" + Integer.toString(theDenom);   
+       }
+       
+       public String toString(){
+           return stringedFrac;
+       }
+}

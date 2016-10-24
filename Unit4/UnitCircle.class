@@ -1,0 +1,17 @@
+//Written by Abdullah Akbar for his compsci class
+
+public class UnitCircle extends ConsoleProgram
+{
+    public void run()
+    {
+        // Write your code here!
+        System.out.println("Radians: (cos, sin)");
+        double twopi = 2 * Math.PI;
+        for(double  i = 0; i < twopi; i += (Math.PI / 4)){
+            double iname = Math.round(i * 100.0) / 100.0;
+            double cosi = Math.round(Math.cos(i) * 100.0) / 100.0;
+            double sini = Math.round(Math.sin(i) * 100.0) / 100.0;
+            System.out.println(iname + ": " + cosi + ", " + sini);
+        }
+    }
+}

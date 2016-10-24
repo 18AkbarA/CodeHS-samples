@@ -1,0 +1,11 @@
+    //Written by Abdullah Akbar for his compsci class
+	
+	//Copy this into DistanceTester.java
+	public double distanceFromInKilometers(GeoLocation other)
+    {
+        
+        GeoLocation place = new GeoLocation(latitude, longitude);
+        double distance = place.distanceFrom(other);
+        return distance * KM_PER_MILE;
+        
+    }
