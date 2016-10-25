@@ -1,0 +1,28 @@
+//Written by Abdullah Akbar for his compsci class
+public class Player 
+{
+    // Static Variables
+    // ...
+    
+    public static int totalPlayers = 0;
+    public static int maxPlayers = 10;
+    
+    // Public Methods
+    public Player() 
+    {
+        // Some code here...
+        totalPlayers++;
+    }
+    
+    // Static Methods 
+    
+    public static boolean gameFull(){
+        if (totalPlayers  >= 10){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    // ...
+}
