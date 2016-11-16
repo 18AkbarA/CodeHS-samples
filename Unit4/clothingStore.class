@@ -1,0 +1,72 @@
+//Written by Abdullah Akbar for his compsci class
+
+
+//paste in Clothing.java:
+
+public class Clothing
+{
+    // Your code here
+    private String size;
+    private String color;
+    
+    public Clothing(String thesize, String thecolor){
+        size = thesize;
+        color = thecolor;
+    }
+    
+    public String getSize(){
+        return size;
+    }
+    public String getColor(){
+        return color;
+    }
+    
+}
+
+//paste in TShirt.java:
+
+public class TShirt extends Clothing
+{
+    private String size;
+    private String color;
+    private String fabric;
+    
+    public TShirt(String tsize, String tcolor, String tfabric){
+        super(tsize,tcolor);
+        fabric = tfabric;
+        
+    }
+    
+    public String getFabric(){
+        return fabric;
+    }
+}
+
+//Paste in Sweatshirt.java:
+
+public class Sweatshirt extends Clothing
+{
+    private boolean thehood;
+    public Sweatshirt(String size, String color, boolean hasHood){
+        super(size,color);
+        thehood = hasHood;
+    }
+    public boolean hasHood(){
+        return thehood;
+    }
+    
+    
+}
+
+
+
+//paste in Jeans.java:
+
+public class Jeans extends Clothing
+{
+    public Jeans(String size){
+        super(size, "blue");
+    }
+}
+
+
