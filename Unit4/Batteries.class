@@ -1,0 +1,21 @@
+//Written by Abdullah Akbar for his Compsci class
+
+//copy this into battery.java
+
+public class Battery
+{
+    private double voltage;
+    static double totalVoltage = 0.0;
+    static int numOfBatteries = 0;
+    public Battery(double voltage)
+    {
+        this.voltage = voltage;
+        totalVoltage = totalVoltage + voltage;
+        numOfBatteries++;
+    }
+    
+    public double getVoltage()
+    {
+        return this.voltage;
+    }
+}
