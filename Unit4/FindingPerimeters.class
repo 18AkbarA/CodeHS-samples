@@ -1,0 +1,112 @@
+//Written by Abdullah Akbar for his compsci class
+
+//Copy this into Shape.java
+
+public abstract class Shape
+{
+    private String name;
+    
+    public Shape(String name)
+    {
+        this.name = name;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
+    public String getName()
+    {
+        return this.name;
+    }
+    public abstract double getPerimeter();
+    public abstract double getArea();
+}
+
+
+//Copy this into Square.java
+
+public class Square extends Rectangle
+{
+    private double squareSide;
+    public Square(double sideLength)
+    {
+        super("Square", sideLength, sideLength);
+		squareSide = sideLength;
+    }
+    
+    public double getSideLength()
+    {
+        return super.getHeight();
+    }
+    
+    public double getPerimeter(){
+        return squareSide * 4.0;
+    }
+}
+
+
+//Copy this into Pentagon.java
+
+public class Pentagon extends Shape
+{
+    private double sideLength;
+
+    public Pentagon(String name, double sideLength)
+    {
+        super(name);
+        this.sideLength = sideLength;
+    }
+    public double getPerimeter(){
+        return sideLength * 5.0;
+    }
+    public Pentagon(double sideLength)
+    {
+        this("Pentagon", sideLength);
+    }
+
+    public double getSideLength()
+    {
+        return sideLength;
+    }
+
+    public double getArea()
+    {
+        return 1.0 / 4.0 * Math.sqrt(5.0 * (5.0 + 2.0 * Math.sqrt(5.0)))
+               * Math.pow(sideLength, 2);
+    }
+}
+
+
+//Copy this into Circle.java
+
+public class Circle extends Shape
+{
+    private double radius;
+
+    public Circle(String name, double radius)
+    {
+        super(name);
+        this.radius = radius;
+    }
+
+
+    public double getPerimeter(){
+        return 2.0 * Math.PI * radius;
+    }
+    public Circle(double radius)
+    {
+        this("Circle", radius);
+    }
+
+    public double getRadius()
+    {
+        return radius;
+    }
+
+    public double getArea()
+    {
+        return Math.PI * Math.pow(radius, 2);
+    }
+}
