@@ -1,0 +1,22 @@
+//Written by Abdullah Akbar for his compsci class
+
+
+public int findMin(int[] arr)
+{
+    int min = 0;
+    int mindex = 0;
+    int arraylength = arr.length;
+    for (int i = 0; i < arraylength; i++){
+       if (i == 0){
+           min = arr[i];
+           mindex = 0;
+       } 
+       else{
+           if (min > arr[i]){
+               min = arr[i];
+               mindex = i;
+           }
+       }
+    }
+    return mindex;
+}

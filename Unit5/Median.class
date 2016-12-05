@@ -1,0 +1,15 @@
+//Written by Abdullah Akbar for his compsci class
+
+public double median(int[] arr)
+{
+    Arrays.sort(arr);
+    int arraylength = arr.length;
+    double median = 0.0;
+    if (arraylength % 2 == 0){
+        median = (arr[arraylength / 2] + arr[arraylength / 2 - 1]) / 2.0;
+    }
+    else{
+       median = arr[arraylength / 2];
+    }
+    return median;   
+}
