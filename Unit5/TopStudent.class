@@ -1,0 +1,129 @@
+//Written by Abdullah Akbar for his compsci class
+
+//Copy this into Student.java
+public class Student
+{
+    private static final int NUM_EXAMS = 4;
+    
+    private String firstName;
+    private String lastName;
+    private int gradeLevel;
+    private double gpa;
+    
+    private int[] exams;
+    private int numExamsTaken;
+
+    /**
+     * This is a constructor.  A constructor is a method
+     * that creates an object -- it creates an instance
+     * of the class. What that means is it takes the input
+     * parameters and sets the instance variables (or fields)
+     * to the proper values.
+     * 
+     * Check out StudentTester.java for an example of how to use
+     * this constructor. 
+     */
+    public Student(String fName, String lName, int grade)
+    {
+        firstName = fName;
+        lastName = lName;
+        gradeLevel = grade;
+        exams = new int[NUM_EXAMS];
+        numExamsTaken = 0;
+    }
+    
+    public double getAverageScore()
+    {
+        // Fill in this method.
+        int arraylength = exams.length;
+        int totalsum = 0;
+        for(int i = 0; i < arraylength; i += 1){
+               totalsum += exams[i];
+        }
+        return (double)totalsum / arraylength;
+    }
+    
+    public String getName()
+    {
+        return firstName + " " + lastName;
+    }
+    
+    public void addExamScore(int score)
+    {
+        exams[numExamsTaken] = score;
+        numExamsTaken++;
+    }
+    
+    // This is a setter method to set the GPA for the Student.
+    public void setGPA(double theGPA)
+    {
+        gpa = theGPA;
+    }
+    
+    /**
+     * This is a toString for the Student class. It returns a String
+     * representation of the object, which includes the fields
+     * in that object.
+     */
+    public String toString()
+    {
+        return firstName + " " + lastName + " is in grade: " + gradeLevel;
+    }
+}
+
+//Copy this into Classroom.java
+public class Classroom
+{
+    Student[] students;
+    int numStudentsAdded;
+    
+    public Classroom(int numStudents)
+    {
+        students = new Student[numStudents];
+        numStudentsAdded = 0;
+    }
+    
+    public Student getTopStudent()
+    {
+        // Fill in this method.
+        int topStudent = 0;
+
+        int arraylength = numStudentsAdded;
+
+        
+        double highestscore = 0.0;
+        for (int i = 0; i < arraylength; i ++){
+            if (i == 0){
+               highestscore = students[i].getAverageScore();
+            }
+            else {
+                double avgscore = students[i].getAverageScore();
+                
+                if (avgscore > highestscore){
+                   topStudent = i; 
+                }
+                
+                
+            }
+        }
+        return students[topStudent];
+        
+    }
+    
+    public void addStudent(Student s)
+    {
+        students[numStudentsAdded] = s;
+        numStudentsAdded++;
+    }
+    
+    public void printStudents()
+    {
+        for(int i = 0; i < numStudentsAdded; i++)
+        {
+            System.out.println(students[i]);
+        }
+    }
+}
+
+
+//Anyone want to pay me in riot points?
