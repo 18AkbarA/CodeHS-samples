@@ -1,0 +1,126 @@
+//Written by Abdullah for his compsci class
+
+//Want to game with me on Steam? Add 'mysterylegodude'
+
+
+//GeoLocation.java
+
+/*
+ * This class stores information about a location on Earth.  Locations are
+ * specified using latitude and longitude.  The class includes a method for
+ * computing the distance between two locations.
+ *
+ * This implementation is based off of the example from Stuart Reges at 
+ * the University of Washington.
+ */
+
+public class GeoLocation 
+{
+    // Earth radius in miles
+    public static final double RADIUS = 3963.1676;  
+    private String placeName;
+    private double latitude;
+    private double longitude;
+
+    /**
+     * Constructs a geo location object with given latitude and longitude
+     */
+    public GeoLocation(String name, double theLatitude, double theLongitude) 
+    {
+        placeName = name;
+        latitude = theLatitude;
+        longitude = theLongitude;
+    }
+
+    public String getName(){
+        return placeName;
+    }
+    /**
+     * Returns the latitude of this geo location
+     */
+    public double getLatitude() 
+    {
+        return latitude;
+    }
+
+    /**
+     * returns the longitude of this geo location
+     */
+    public double getLongitude() 
+    {
+        return longitude;
+    }
+
+    // returns a string representation of this geo location
+    public String toString() 
+    {
+        return placeName + " (" + latitude + ", " + longitude + ")";
+    }
+
+    // returns the distance in miles between this geo location and the given
+    // other geo location
+    public double distanceFrom(GeoLocation other) 
+    {
+        double lat1 = Math.toRadians(latitude);
+        double long1 = Math.toRadians(longitude);
+        double lat2 = Math.toRadians(other.latitude);
+        double long2 = Math.toRadians(other.longitude);
+        // apply the spherical law of cosines with a triangle composed of the
+        // two locations and the north pole
+        double theCos = Math.sin(lat1) * Math.sin(lat2) +
+            Math.cos(lat1) * Math.cos(lat2) * Math.cos(long1 - long2);
+        double arcLength = Math.acos(theCos);
+        return arcLength * RADIUS;
+    }
+}
+
+
+//RoadTrip.java
+import java.util.*;
+
+public class RoadTrip
+{
+    
+    
+    public ArrayList<GeoLocation> stops = new ArrayList<GeoLocation>();
+    public void addStop(String name, double latitude, double longitude){
+        GeoLocation newstop = new GeoLocation(name,latitude,longitude);
+        stops.add(newstop);
+    }
+    
+    public int getNumberOfStops(){
+        return stops.size();
+    }
+    
+    
+    public double getTripLength(){
+        int stopNumber = stops.size() - 1;
+        double tripLength = 0.0;
+        for(int i = 0; i < stopNumber; i++){
+            GeoLocation stopOne = stops.get(i);
+            GeoLocation stopTwo = stops.get(i + 1);
+            double distance = stopOne.distanceFrom(stopTwo);
+            tripLength += distance;
+        }
+        
+        return tripLength;
+        
+    }
+    
+    public String toString(){
+        int stopNumber = stops.size();
+       
+        
+        String fullList = "";
+        
+        
+        for(int i = 0; i < stopNumber; i++){
+            String listadd = (i + 1) + ". " + stops.get(i).toString() + "\n";
+            fullList += listadd;
+            
+        }
+        
+        return fullList;
+    }
+    
+}

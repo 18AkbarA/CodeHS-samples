@@ -1,0 +1,19 @@
+//Written by Abdullah Akbar for his compsci class
+
+import java.util.ArrayList;
+
+public class MyProgram extends ConsoleProgram
+{
+    public void run()
+    {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        // Add 5 numbers to `numbers`
+        
+        for (int i = 1; i < 6; i++){
+            numbers.add(i);
+        }
+        
+        System.out.println(numbers.get(0));
+        // Print out the first element in `numbers`
+    }
+}
