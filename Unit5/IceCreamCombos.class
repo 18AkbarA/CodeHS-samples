@@ -1,0 +1,28 @@
+//Written by Abdullah Akbar for his compsci class
+
+//Like what you see? How 'bout donating a buck or two?
+
+//Anyways, here's the code
+public ArrayList<String> getAllChoices(String[] flavors, String[] toppings)
+{
+    // Write your code here!
+    
+    ArrayList<String> thelist = new ArrayList<String>();
+    
+    int flavorlength = flavors.length;
+    int toppingslength = toppings.length;
+    
+    for (int i = 0; i < flavorlength; i++){
+        String theflavor = flavors[i];
+        for (int x = 0; x < toppingslength; x++){
+            String thetopping = toppings[x];
+             String icecream = theflavor + " with "+thetopping+" on top";
+        thelist.add(icecream);
+        }
+        
+       
+    }
+    
+    return thelist;
+    
+}

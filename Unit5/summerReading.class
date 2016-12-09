@@ -1,0 +1,21 @@
+//Written by Abdullah Akbar for his compsci class
+
+public List<Book> filterBooks(List<Book> readingList, String author)
+{
+    List<Book> newlist = new ArrayList<Book>();
+    
+    int listsize = readingList.size();
+
+    for (int i = 0; i < listsize; i++)
+    {
+        Book thebook = readingList.get(i);
+        
+        if (thebook.getAuthor().equals(author)){
+            newlist.add(thebook);
+        }
+        
+    }
+    
+    return newlist;
+
+}

@@ -1,0 +1,13 @@
+//Written by Abdullah Akbar for his compsci class
+
+//This code is to help you understand how to proceed. If you have any questions about it, feel free to ask me
+
+public int sumRow(int[][] matrix, int row)
+{
+    int theSum = 0;
+    int[] theArray = matrix[row];
+    for (int i = 0; i < theArray.length; i++){
+        theSum += theArray[i];
+    }
+    return theSum;
+}
