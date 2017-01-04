@@ -1,0 +1,79 @@
+//Written by Abdullah Akbar for his compsci class
+
+
+import java.util.*;
+
+
+public class WordCounts extends ConsoleProgram
+{
+    public void run()
+    {
+        // Start here!
+        
+        //Get a String from the user
+        String userInput = readLine("Enter a string: ");
+        
+        //Convert the userInput into lowercase
+        String newInput = userInput.toLowerCase();
+        
+        //Split the userInput up into an array
+        String[] testArray = newInput.split(" ");
+        
+        //My workaround around Java's silly rule about not being able to push to arrays.
+        String packedMeat = "";
+        
+        //Creates a HashMap for words and their respective counts
+        HashMap<String, Integer> wordcount = new HashMap<String, Integer>();
+        
+        //Sorts the array created from userInput
+        Arrays.sort(testArray);
+
+        //loops through this array
+        for (int i = 0; i < testArray.length; i++){
+            String theelement = testArray[i];
+            
+            //If the HashMap doesnt have the word, add the word to the HashMap and the PackedMeat string
+            if(!wordcount.containsKey(theelement)){
+                wordcount.put(theelement , 1);
+                packedMeat += theelement + "0-0";
+            }
+            
+            //If the HashMap has the word, add 1 to its count value in the HashMap
+            else{
+                int newElementCount = wordcount.get(theelement) + 1;    
+                wordcount.put(theelement , newElementCount);
+            }
+        }
+        
+        
+        //Turned packedMeat into an array
+        String[] meatArray = packedMeat.split("0-0");
+        
+        //Loop through meatArray and print each word and its respective count
+        for (int i = 0; i < meatArray.length; i++){
+            String meatelement = meatArray[i]; 
+            int count = wordcount.get(meatelement);
+            System.out.println(meatelement + ": " + count);
+        }
+        
+        /*
+        for(String key: wordcount.keySet()){
+            int count = wordcount.get(key);
+            System.out.println(key + ": " + count);
+        }
+        */
+        /*
+        int majorletternumb = 0;
+        
+        for (int i = 0; i < testArray.length; i++){
+            String theelement = testArray[i];
+            if (i == 0){
+                majorletternumb = theelement[0];
+            }
+            else if (majorletternumb > theelement[0]){
+                majorletternumb = theelement[0];
+            }
+            System.out.println(testArray[i]);
+        }*/
+    }
+}
