@@ -1,0 +1,41 @@
+//Written by Abdullah Akbar for his compsci class:
+
+public String binaryToText(String binary)
+{
+    String end = "";
+    // Write your code here!
+    int binarylength = binary.length();
+    int codebite = binarylength / 8;
+    
+    for (int i = 0; i < codebite; i++){
+        int codenumb = i * 8;
+        String letterBinary = binary.substring(codenumb, codenumb + 8);
+        end += "" + (char)binaryToDecimal(letterBinary);
+    }
+
+    return end;
+}
+
+public int binaryToDecimal(String binaryString)
+{
+    // Copy over your binaryToDecimal method here
+    // It will be useful when writing your binaryToText method
+    int ender = 0;
+    
+    //int firstInt = Integer.parseInt(binaryString);
+    
+    String[] explodedArray = binaryString.split("");
+    
+    for (int i = 0; i < explodedArray.length; i++){
+        
+        int theNumb = Integer.parseInt(explodedArray[i]);
+        int theExponent = explodedArray.length - (i + 1);
+        
+        if (theNumb == 1){
+        ender += Math.pow(2 , theExponent);
+        }
+    }
+    
+    
+    return ender;
+}
