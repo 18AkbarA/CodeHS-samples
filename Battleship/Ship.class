@@ -1,0 +1,101 @@
+public class Ship
+{
+
+    private int shipRow = -1;
+    private int shipCol = -1;
+    private int shipLength = 0;
+    private int shipDirection = -1;
+    private boolean locationSet = false;
+    private boolean directionSet = false;
+    
+    public static final int UNSET = -1;
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
+
+
+    public Ship(int length){
+        if (length > 5){
+            System.out.println("The Ship's maximum length allowed is 5!");
+        }
+        else{
+            shipLength = length;
+        }
+    }
+    
+    
+    public boolean isLocationSet(){
+
+        
+        return locationSet;
+    }
+    
+    
+    public boolean isDirectionSet(){
+
+        return directionSet;
+    }
+    public void setLocation(int row, int col){
+        shipRow = row;
+        shipCol = col;
+        locationSet = true;
+    }
+    
+    
+    
+    public void setDirection(int direction){
+        if (direction == -1 || direction  == 0 || direction == 1){
+            if(direction == 0 && (shipCol + shipLength) > 11){
+                System.out.println("The ship can't fit on the board horizontally!");
+            }
+            else if(direction == 1 && (shipRow + shipLength) > 11){
+                System.out.println("The ship can't fit on the board vertically!");
+            }
+            else{
+                shipDirection = direction;
+                directionSet = true;
+            }
+        }
+        
+    }
+    
+    public int getRow(){
+        return shipRow;
+    }
+    
+    public int getCol(){
+        return shipCol;
+    }
+    
+    public int getLength(){
+        return shipLength;
+    }
+    
+    public int getDirection(){
+        return shipDirection;
+    }
+    
+    
+    private String directionToString(){
+        if (shipDirection == -1){
+            return "unset";
+        }
+        else if (shipDirection == 0){
+            return "horizontal";
+        }
+        else if(shipDirection == 1){
+            return "vertical";
+        }
+        
+        return "Derp";
+    }
+
+
+    public String toString(){
+      if(shipDirection == -1){
+            return "unset direction ship of length " + shipLength + " at (unset location)";
+        }
+        else{
+            return this.directionToString() + " ship of length " +shipLength + " at (" + shipRow + ", " + shipCol + ")";
+        }
+    }
+}

@@ -1,0 +1,66 @@
+public class Location
+{
+    //Implement the Location class here
+    
+    public static final int UNGUESSED = 0;
+    public static final int HIT = 1;
+    public static final int MISSED = 2;
+    
+    private int locationType;
+    private boolean hasShip = false;
+    
+    
+    public Location(){
+        locationType = 0;
+    }
+    
+    public void markHit(){
+        locationType = 1;
+    }
+
+    public void markMiss(){
+        locationType = 2;
+    }
+    
+    public boolean checkHit(){
+        if (locationType == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean checkMiss(){
+        if (locationType == 2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean isUnguessed(){
+        if (locationType == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+
+    public void setShip(boolean val){
+        hasShip = val;
+    }
+    
+    public boolean hasShip(){
+        return hasShip;
+    }
+    
+    public void setStatus(int status){
+        locationType = status;
+    }
+    
+    public int getStatus(){
+        return locationType;
+    }
+}

@@ -1,0 +1,240 @@
+public class Grid
+{
+    // Write your Grid class here
+    
+	/* Consider the grid like a coordinate system (or a graph)
+	
+	it should be a 10 x 10 grid, essentially going from 1-10 on the x axis (row number) and y-axis(column number)
+	
+	Each location will be represented as (row,col)
+	*/
+	
+    private Location[][] grid = new Location[10][10];
+
+    // Constants for number of rows and columns.
+    public static final int NUM_ROWS = 10;
+    public static final int NUM_COLS = 10;
+    
+    
+	//Creates the grid and sets a location to every space;
+    public Grid(){
+        for(int row = 0; row < NUM_ROWS; row++){
+            for(int col = 0; col < NUM_COLS; col++){
+                Location square = new Location();
+                
+                grid[row][col] = square;
+            }
+        }
+        
+    }
+    
+	
+	/* Whenever you see the following if statement:
+	
+	        if (row > 9 || col > 9){
+				System.out.println("Parameters must be less than 9");
+			}
+		it's for checking to make sure the grid square actually exists
+	*/
+	
+	//Marks the selected square with a hit
+    public void markHit(int row, int col){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+        }
+        
+        else{
+            Location theSpot = grid[row][col];
+            theSpot.markHit();
+        }
+    }
+	
+    //Marks the selected square with a miss
+    public void markMiss(int row, int col){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+        }
+        
+        else{
+            Location theSpot = grid[row][col];
+            theSpot.markMiss();
+        }
+    }
+    
+	//Sets the selected square's status
+    public void setStatus(int row, int col, int status){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+        }
+        else{
+            Location theSpot = grid[row][col];
+            theSpot.setStatus(status); 
+        }
+    }
+    
+	//Returns the selected square's status
+    public int getStatus(int row, int col){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+            return 0;
+        }
+        else{
+            Location theSpot = grid[row][col];
+             return theSpot.getStatus();   
+        }
+    }
+    
+	//Sets a ship in the selected square
+    public void setShip(int row, int col, boolean val){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+        }
+        else{
+            Location theSpot = grid[row][col];
+            theSpot.setShip(val);   
+        }
+        
+        
+    }
+	
+	
+	//checks if the square is alreadyGuessed (returns opposite of square.isUnguessed())
+    public boolean alreadyGuessed(int row, int col){
+        Location theSpot = grid[row][col];
+        
+        return theSpot.isUnguessed() == false;
+        
+    }
+	//Check if the selected square has a ship
+    public boolean hasShip(int row, int col){
+        if (row > 9 || col > 9){
+            System.out.println("Parameters must be less than 9");
+            return false;
+        }
+        else{
+            Location theSpot = grid[row][col];
+            return theSpot.hasShip();   
+        }
+    }
+    
+	//Returns the location associated with the selected grid space
+    public Location get(int row, int col){
+        return grid[row][col];
+    }
+    
+	//returns the number of rows in the grid
+    public int numRows(){
+        return NUM_ROWS;
+    }
+	
+	
+    //returns the number of columns in the grid
+    public int numCols(){
+        return NUM_COLS;
+    }
+    
+    public void printStatus(){
+
+	
+		//Prints out the numbers on the top of the grid
+        System.out.print("");
+        for(int i = 1; i < 11; i++){
+            System.out.print(" " + i );
+        }
+		
+        //Creates a line break
+        System.out.print("\n");
+        
+        for (int i = 0; i < NUM_ROWS; i++){
+			//prints out the letters at the sides of the grid
+            char startingchar = (char)(i + 65);
+            System.out.print(startingchar + "");
+            for (int l = 0; l < NUM_COLS; l++){
+                
+                Location theSquare = grid[i][l];
+                int status = theSquare.getStatus();
+                
+				
+				//prints out the status for each square: " -" if unguessed, " X" if hit, " 0" if miss
+                if (status == 0){
+                    System.out.print(" -");
+                }
+                else if (status == 1){
+                    System.out.print(" X");
+                }
+                else{
+                    System.out.print(" O");
+                }
+                
+            }
+			//Creates a line break
+            System.out.print(" \n");
+        }
+        
+    }
+    
+	//Prints out a grid with ships
+    public void printShips(){
+        
+		//prints numbers at the top of the grid
+        System.out.print(" ");
+        for(int i = 1; i < 11; i++){
+            System.out.print(" " + i);
+        }
+        
+        System.out.print("\n");
+        
+        for (int i = 0; i < NUM_ROWS; i++){
+			//prints characters on side of grid
+            char startingchar = (char)(i + 65);
+            System.out.print(startingchar);
+            for (int l = 0; l < NUM_COLS; l++){
+                
+                Location theSquare = grid[i][l];
+                boolean status = theSquare.hasShip();
+                //just like printStatus(), but prints " X" if a ship exists at the location, and " -" if not.
+                if (status){
+                    System.out.print(" X");
+                }
+                else{
+                    System.out.print(" -");
+                }
+                
+            }
+            System.out.print(" \n");
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+	//Adds a ship to the grid
+    public void addShip(Ship s){
+        int shipLength = s.getLength();
+        int shipDirection = s.getDirection();
+        
+		//Adds a vertical ship
+        if(shipDirection == 0){
+            for(int i = 0; i < shipLength; i ++){
+                Location shipLocation = grid[s.getRow()][s.getCol() + i];
+                shipLocation.setShip(true);
+            }
+        }
+        
+		//Adds a horizontal ship
+        else if(shipDirection == 1){
+            for(int i = 0; i < shipLength; i ++){
+                Location shipLocation = grid[s.getRow() + i][s.getCol()];
+                shipLocation.setShip(true);
+            }
+        }
+        
+    }
+    
+    
+    
+    
+}

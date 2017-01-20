@@ -1,0 +1,58 @@
+public class Player
+{
+    
+    private static final int[] SHIP_LENGTHS = {2, 3, 3, 4, 5};
+    // Write your Player class here
+    
+    public Grid playerGrid = new Grid();
+    
+    public Grid opponentGrid = new Grid();
+    
+    public void chooseShipLocation(Ship s, int row, int col, int direction){
+        
+        s.setDirection(direction);
+        s.setLocation(row,col);
+        
+        playerGrid.addShip(s);
+        
+        
+        
+    }
+    
+    
+    public void printMyShips(){
+        playerGrid.printShips();
+    }
+    
+    public void printMyGuesses(){
+        
+        playerGrid.printStatus();
+    }
+    
+    public void printOpponentGuesses(){
+        opponentGrid.printStatus();
+    }
+ 
+    public void recordOpponentGuess(int row, int col){
+       
+
+        
+
+
+        if(opponentGrid.alreadyGuessed(row,col)){
+            System.out.println("Square is already guessed!");
+        }
+        else{
+            boolean theStatus = playerGrid.hasShip(row,col);
+            System.out.println(theStatus);
+            if(theStatus == true){
+                opponentGrid.markHit(row,col);   
+            }
+            else{
+                opponentGrid.markMiss(row,col);
+            }
+        }
+        
+    }
+    
+}
