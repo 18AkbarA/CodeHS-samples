@@ -1,3 +1,4 @@
+
 public class Grid
 {
     // Write your Grid class here
@@ -10,12 +11,18 @@ public class Grid
 	*/
 	
     private Location[][] grid = new Location[10][10];
-
+    public int twoshipnumb = 0;
+    public int threeshipnumb = 0;
+    public int fourshipnumb = 0;
+    public int fiveshipnumb = 0;
     // Constants for number of rows and columns.
     public static final int NUM_ROWS = 10;
     public static final int NUM_COLS = 10;
     
+    public int totalShips = 0;
     
+    public boolean shipWasAdded = true;
+    //public int totalOpponentShips = 0;
 	//Creates the grid and sets a location to every space;
     public Grid(){
         for(int row = 0; row < NUM_ROWS; row++){
@@ -141,8 +148,7 @@ public class Grid
         for(int i = 1; i < 11; i++){
             System.out.print(" " + i );
         }
-		
-        //Creates a line break
+        
         System.out.print("\n");
         
         for (int i = 0; i < NUM_ROWS; i++){
@@ -155,7 +161,7 @@ public class Grid
                 int status = theSquare.getStatus();
                 
 				
-				//prints out the status for each square: " -" if unguessed, " X" if hit, " 0" if miss
+				//prints out the status for each
                 if (status == 0){
                     System.out.print(" -");
                 }
@@ -167,16 +173,13 @@ public class Grid
                 }
                 
             }
-			//Creates a line break
             System.out.print(" \n");
         }
         
     }
     
-	//Prints out a grid with ships
     public void printShips(){
         
-		//prints numbers at the top of the grid
         System.out.print(" ");
         for(int i = 1; i < 11; i++){
             System.out.print(" " + i);
@@ -184,15 +187,14 @@ public class Grid
         
         System.out.print("\n");
         
-        for (int i = 0; i < NUM_ROWS; i++){
-			//prints characters on side of grid
+        for (int i = 0; i < 10; i++){
             char startingchar = (char)(i + 65);
             System.out.print(startingchar);
-            for (int l = 0; l < NUM_COLS; l++){
+            for (int l = 0; l < 10; l++){
                 
                 Location theSquare = grid[i][l];
                 boolean status = theSquare.hasShip();
-                //just like printStatus(), but prints " X" if a ship exists at the location, and " -" if not.
+                //int status = 0;
                 if (status){
                     System.out.print(" X");
                 }
@@ -211,29 +213,114 @@ public class Grid
     
     
     
-	//Adds a ship to the grid
     public void addShip(Ship s){
         int shipLength = s.getLength();
         int shipDirection = s.getDirection();
+        //System.out.println(s.isLocationSet());
+        if (s.shipSet == false){
+            boolean setShip = true;
         
-		//Adds a vertical ship
-        if(shipDirection == 0){
-            for(int i = 0; i < shipLength; i ++){
-                Location shipLocation = grid[s.getRow()][s.getCol() + i];
-                shipLocation.setShip(true);
+            //Test if the ship will be placed on another ship
+            if (shipDirection == 0){
+                    if(s.getCol() + shipLength > (NUM_COLS + 1)){
+                        //System.out.println("WARNING: The ship sticks off the grid!");
+                    }
+                    
+                else{
+                    for(int i = 0; i < shipLength; i ++){
+                        Location shipLocation = grid[s.getRow()][s.getCol() + i];
+                        if(shipLocation.hasShip()){
+                            System.out.println("A Ship already exists on one of those spaces!");
+                            setShip = false;
+                        }
+                    }   
+                }
+            }
+        
+            else if (shipDirection == 1){
+                if(s.getRow() + shipLength >= (NUM_ROWS)){
+                    System.out.println("WARNING: The ship sticks off the grid!");
+                }
+                else{
+                    for(int i = 0; i < shipLength; i ++){
+                    
+
+
+                        Location shipLocation = grid[s.getRow() + i][s.getCol()];
+                        if(shipLocation.hasShip()){
+                            System.out.println("WARNING: A Ship already exists on one of those spaces!");
+                            setShip = false;
+                        }
+                    }
+                }
+            }
+        
+            if(shipDirection == 0 && s.getCol() + s.getLength() <= 11 && setShip){
+                
+                for(int i = 0; i < shipLength; i ++){
+                    Location shipLocation = grid[s.getRow()][s.getCol() + i];
+                    shipLocation.setShip(true);
+                    s.shipSet = true;
+                    
+                    
+                }
+                System.out.println("Ship successfully added!");
+                totalShips++;
+                if(shipLength == 2){
+                        twoshipnumb++;
+                    }
+                    else if(shipLength == 3){
+                        threeshipnumb++;
+                    }
+                    else if (shipLength == 4){
+                        fourshipnumb++;
+                    }
+                    else if (shipLength == 5){
+                        fiveshipnumb++;
+                    }
+            }
+        
+            else if(shipDirection == 1 && s.getRow() + s.getLength() <= 11 && setShip){
+                
+                for(int i = 0; i < shipLength; i ++){
+                    Location shipLocation = grid[s.getRow() + i][s.getCol()];
+                    shipLocation.setShip(true);
+                    s.shipSet = true;
+                    
+                    
+                }
+                System.out.println("Ship successfully added!");
+                    totalShips++;
+                    
+                    if(shipLength == 2){
+                        twoshipnumb++;
+                    }
+                    else if(shipLength == 3){
+                        threeshipnumb++;
+                    }
+                    else if (shipLength == 4){
+                        fourshipnumb++;
+                    }
+                    else if (shipLength == 5){
+                        fiveshipnumb++;
+                    }
+            }
+            else if (setShip != false){
+                System.out.println("WARNING: Your ship sticks off the grid!");
+
+            }
+            else{
+            
             }
         }
-        
-		//Adds a horizontal ship
-        else if(shipDirection == 1){
-            for(int i = 0; i < shipLength; i ++){
-                Location shipLocation = grid[s.getRow() + i][s.getCol()];
-                shipLocation.setShip(true);
-            }
+        else{
+            System.out.println("WARNING: That ship's location is already set!");
         }
         
     }
     
+    
+
     
     
     

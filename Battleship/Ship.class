@@ -1,3 +1,5 @@
+
+
 public class Ship
 {
 
@@ -7,6 +9,8 @@ public class Ship
     private int shipDirection = -1;
     private boolean locationSet = false;
     private boolean directionSet = false;
+    
+    public boolean shipSet = false;
     
     public static final int UNSET = -1;
     public static final int HORIZONTAL = 0;
@@ -45,10 +49,10 @@ public class Ship
     public void setDirection(int direction){
         if (direction == -1 || direction  == 0 || direction == 1){
             if(direction == 0 && (shipCol + shipLength) > 11){
-                System.out.println("The ship can't fit on the board horizontally!");
+                System.out.println("WARNING: The ship can't fit on the board horizontally!");
             }
             else if(direction == 1 && (shipRow + shipLength) > 11){
-                System.out.println("The ship can't fit on the board vertically!");
+                System.out.println("WARNING: The ship can't fit on the board vertically!");
             }
             else{
                 shipDirection = direction;

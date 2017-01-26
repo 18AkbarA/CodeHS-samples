@@ -1,0 +1,96 @@
+
+import java.util.*;
+public class Battleship
+{
+    Player thePlayer = new Player();
+    boolean canContinue = false;
+    public String[] directions = {"horizontal","vertical"};
+    
+    Scanner scanner = new Scanner(System.in);
+    public String readLine(String text){
+    	System.out.print(text);
+    	String nexttyped = scanner.next();
+
+    		return nexttyped;
+    	
+    }
+    
+    public static void main(String[] args)
+	{
+		//System.out.println("Test");
+		 Battleship BattleshipGame =new Battleship();
+		 BattleshipGame.run();
+		
+	}
+    
+    public void delayTime(int delayTime){
+    	try {
+    	    Thread.sleep(delayTime);                 
+    	} catch(InterruptedException ex) {
+    	    Thread.currentThread().interrupt();
+    	}
+    }
+    public void run()
+    {
+        // Start here! This class should interact with the user
+        // to play the game of Battleship
+        
+        // You only need to allow for the user to set up each player's
+        // ships and for each player to make a guess on the other player's grid
+        // Don't worry about finishing the whole game yet.
+        
+        // You will probably need to make additions to the Player class to
+        // allow for this setting up and guessings
+        
+        
+        System.out.println("Welcome to Battleship!");
+        delayTime(1000);
+        System.out.println("At this stage, you must add your ships");
+        System.out.println("You must add all 5 ships with lengths: 2,3,3,4,5");
+        delayTime(1000);
+        System.out.println("Add a ship using this format:");
+        
+        System.out.println("Shiplength:StartingLocation:direction");
+        
+        System.out.println("For example: 4:A3:vertical");
+        delayTime(1000);
+        System.out.println("Type 'shipsleft' to see how many ships you have to add.");
+        
+        delayTime(1000);
+        System.out.println("The next stage will start after you have added all 5 ships.");
+        
+        delayTime(1000);
+        System.out.println("Current status:");
+        thePlayer.printMyShips();
+        
+        while(canContinue == false){
+            
+            String shipPlace = readLine("Add a ship: ").toLowerCase();
+            
+            if(shipPlace.equals("shipsleft") || shipPlace.equals("'shipsleft'")){
+                int totalShips = thePlayer.playerGrid.totalShips;
+                int shipsLeft = 5 - totalShips;
+                if (shipsLeft == 1){
+                    System.out.println("You still need to add 1 more ship!");
+                }
+                else{
+                   System.out.println("You still need to add "+shipsLeft+" more ships!"); 
+                }
+            }
+            else{
+                thePlayer.askForGuess(shipPlace);
+            }
+            
+            if(thePlayer.playerGrid.totalShips == 5){
+            	System.out.println("You have placed all of your ships! The next stage will commence!");
+            	canContinue = true;
+            }
+        }
+
+        System.out.println("Ready? Let us begin, then!");
+        
+    }
+       
+        
+        
+}

@@ -1,8 +1,17 @@
+
+import java.util.*;
+
 public class Player
 {
     
-    private static final int[] SHIP_LENGTHS = {2, 3, 3, 4, 5};
+    private static final int[] SHIP_LENGTHS = {2, 3, 4, 5};
     // Write your Player class here
+    
+    
+    //Will be used for ship limits (1 for each except 3, which has 2)
+
+   
+    
     
     public Grid playerGrid = new Grid();
     
@@ -10,15 +19,191 @@ public class Player
     
     public void chooseShipLocation(Ship s, int row, int col, int direction){
         
-        s.setDirection(direction);
-        s.setLocation(row,col);
+        int shipLength = s.getLength();
         
-        playerGrid.addShip(s);
         
+        if(shipLength != 2 && shipLength != 3 && shipLength != 4 && shipLength != 5){
+            System.out.println("Ship must have one of the following lengths: 2,3,4,5");
+        }
+        else{
+            
+            if(shipLength == 2){
+                int twoshipnumb  = playerGrid.twoshipnumb;
+                if (twoshipnumb >= 1){
+                    System.out.println("WARNING: You can only have one ship with length 2!");
+                    
+                }
+                else{
+                    s.setDirection(direction);
+                    s.setLocation(row,col);
+        
+                    playerGrid.addShip(s);
+                }
+
+            }
+
+            if(shipLength == 3){
+                int threeshipnumb = playerGrid.threeshipnumb;
+                if (threeshipnumb >= 2){
+                    System.out.println("WARNING: You can only have two ships with length 3!");
+                    
+                }
+                else{
+                    s.setDirection(direction);
+                    s.setLocation(row,col);
+                    
+                    playerGrid.addShip(s);
+                }
+
+            }
+
+            if(shipLength == 4){
+                int fourshipnumb = playerGrid.fourshipnumb;
+               
+                if (fourshipnumb >= 1){
+                    System.out.println("WARNING: You can only have one ship with length 4!");
+                    
+                }
+                else{
+                    s.setDirection(direction);
+                    s.setLocation(row,col);
+        
+                    playerGrid.addShip(s);
+
+                }
+
+            }
+            
+            if(shipLength == 5){
+                int fiveshipnumb = playerGrid.fiveshipnumb;
+                if (fiveshipnumb >= 1){
+                    System.out.println("WARNING: You can only have one ship with length 5!");
+                    
+                }
+                else{
+                    s.setDirection(direction);
+                    s.setLocation(row,col);
+        
+                    playerGrid.addShip(s);
+                }
+
+            }
+
+        }
         
         
     }
     
+    
+    
+    public void askForGuess(int row, int col){
+        if (opponentGrid.alreadyGuessed(row,col)){
+            System.out.println("That square is already guessed!");
+            
+        }
+        
+        else if (row > 9 || row < 0 || col > 9 || col < 0){
+            System.out.println("That square does not exist!");
+        }
+        else{
+            
+            boolean squareHasShip = opponentGrid.hasShip(row,col);
+            
+            if (squareHasShip){
+                System.out.println("Hit!");
+                
+                opponentGrid.markHit(row,col);
+            }
+            else{
+                System.out.println("Miss!");
+                opponentGrid.markMiss(row,col);
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+    }
+    public int convertToInt(String theChar){
+        String lowered = theChar.toLowerCase();
+        
+        char stringChar = lowered.charAt(0);
+        
+        int charint = (int)stringChar;
+        if(97 <= charint && charint <= 106){
+            return charint - 97;
+        }
+        else{
+            return 0;
+        }
+        
+        
+    }
+    
+    public void checkSynthax(){
+        System.out.println("Please check your synthax!");
+    }
+    
+    public void askForGuess(String guess){
+        
+        if(guess.indexOf(":") <= -1){
+            checkSynthax();
+        }
+        else{
+            String[] guessStrings = guess.split(":");
+            
+            //System.out.println(guessStrings[0]);
+            
+            int guessStringLength = guessStrings.length;
+            int stringTwoLength = guessStrings[1].length();
+            
+            if (guessStringLength != 3 || (stringTwoLength != 2 && guessStrings[1].indexOf("10") <= -1)){
+                checkSynthax();
+                
+            }
+            else{
+                int Shiplength = Integer.parseInt(guessStrings[0]);
+                
+                Ship theShip = new Ship(Shiplength);
+                
+                String fullSecond = guessStrings[1];
+                char secondFirstChar = guessStrings[1].charAt(0);
+                String secondSecondPart = fullSecond.replace(""+ secondFirstChar, "");
+                int Shiprow = convertToInt("" + secondFirstChar);
+                
+                int Shipcol = Integer.parseInt(secondSecondPart) - 1;
+                String dirgiven = guessStrings[2].toLowerCase();
+                int Shipdir = -1;
+                if(dirgiven.equals("horizontal")){
+                    Shipdir = 0;
+                }
+                else if (dirgiven.equals("vertical")){
+                    Shipdir = 1;
+                }
+                else{
+                    checkSynthax();
+                    
+                }
+                if (0 > Shipcol || 11 <= Shipcol || -1 >= Shiprow || 10<= Shiprow){
+                    checkSynthax();
+                    
+                    
+                }
+                else{
+                    chooseShipLocation(theShip,Shiprow,Shipcol,Shipdir);
+                    
+                }
+                
+                
+            }
+            
+            System.out.println("Current status:");
+            printMyShips();
+        }
+    }
     
     public void printMyShips(){
         playerGrid.printShips();
