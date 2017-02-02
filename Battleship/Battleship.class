@@ -1,9 +1,29 @@
 
 import java.util.*;
+
+
+
+import java.io.*;
+
+
+
 public class Battleship
 {
+	
     Player thePlayer = new Player();
-    boolean canContinue = false;
+    boolean playerCanContinue = false;
+    
+    
+    Player opponent = new Player();
+    boolean opponentCanContinue = false;
+    
+    boolean guessStage = true;
+    boolean playerGuessStage = true;
+    
+    boolean opponentGuessStage = true;
+    
+    boolean playerGuess = true;
+    
     public String[] directions = {"horizontal","vertical"};
     
     Scanner scanner = new Scanner(System.in);
@@ -63,7 +83,7 @@ public class Battleship
         System.out.println("Current status:");
         thePlayer.printMyShips();
         
-        while(canContinue == false){
+        while(playerCanContinue == false){
             
             String shipPlace = readLine("Add a ship: ").toLowerCase();
             
@@ -78,19 +98,168 @@ public class Battleship
                 }
             }
             else{
-                thePlayer.askForGuess(shipPlace);
+               
+                thePlayer.putDownShip(shipPlace);
             }
             
             if(thePlayer.playerGrid.totalShips == 5){
             	System.out.println("You have placed all of your ships! The next stage will commence!");
-            	canContinue = true;
+            	playerCanContinue = true;
             }
         }
-
+        delayTime(1000);
         System.out.println("Ready? Let us begin, then!");
+        delayTime(1000);
+        System.out.println("It is now time for your opponent to place ships!");
+        delayTime(1000);
         
+        while(opponentCanContinue == false){
+            
+            //int[]shipLengths = {2,3,3,4,5};
+            
+            int randomShipLength = Randomizer.nextInt(2,5);
+            
+            int charNumb = 97 + Randomizer.nextInt(0,9);
+            
+            char randomShipChar = (char)charNumb;
+            
+            int columnNumb = Randomizer.nextInt(1,10);
+            
+            int RandDirNumb = Randomizer.nextInt(4,7);
+            
+            int dirNumb = 0;
+            if (RandDirNumb == 4 || RandDirNumb == 7){
+            	dirNumb = 1;
+            }
+            
+            String shipDir = directions[dirNumb];
+            
+            String shipPlace = "" + randomShipLength+":"+randomShipChar + columnNumb+":" + shipDir;
+            
+            
+            opponent.showOutput = false;
+            opponent.playerGrid.showOutput = false;
+            
+            opponent.putDownShip(shipPlace);
+            if(opponent.playerGrid.totalShips == 5){
+            	System.out.print("Your opponent is thinking");
+            	for(int i = 0; i < 7; i++){
+            		delayTime(1000);
+            		System.out.print(".");
+            	}
+            	System.out.print("\n");
+                System.out.println("You opponent has put all ships down!");
+                
+                opponent.showOutput = true;
+                opponent.playerGrid.showOutput = true;
+                
+                opponentCanContinue = true;
+            }
+        }
+        
+    	delayTime(1000);
+    	System.out.println("It is time for you to guess now!");
+    	
+    	System.out.println("Current opponent grid:");
+    	opponent.playerGrid.printStatus();
+        while(guessStage){
+        	
+
+        	
+        	while(playerGuess){
+        		String guess = readLine("Enter your guess:");
+        		getGuess(guess);
+        	
+
+        	}
+    		System.out.println("Current opponent grid:");
+    		opponent.playerGrid.printStatus();
+        	delayTime(1000);
+        	System.out.print("It is time for your opponent to guess");
+        	
+        	for (int i = 0; i < 4; i++){
+        		delayTime(1000);
+        		System.out.print(".");
+        	}
+        	System.out.print("\n");
+        	randomGuess();
+        	
+        	System.out.println("Your current grid:");
+        	thePlayer.playerGrid.printStatus();
+        	playerGuess = true;
+        	
+        	if(thePlayer.hitShips == 17){
+        		guessStage = false;
+        		playerWins();
+        	}
+        	else if(opponent.hitShips == 17){
+        		guessStage = false;
+        		opponentWins();
+        	}
+        	
+        }
     }
        
         
+   
+    
+    public void playerWins(){
+    	System.out.println("You won! Congrats!");
+    }
+    public void opponentWins(){
+    	System.out.println("You're opponent won! That's kinda sad...");
+    }
+    public void randomGuess(){
+    	boolean opponentisGuessing = true;
+    	while(opponentisGuessing){
+    		
+    		
+    		int randOne = Randomizer.nextInt(0,9);
+    		int randTwo = Randomizer.nextInt(0,9);
+    		
+    		char rowChar = (char)(65 + randOne);
+    		int columnNumb = randTwo + 1;
+    		
+    		if (thePlayer.playerGrid.alreadyGuessed(randOne, randTwo)){
+    			
+    		}
+    		else{
+    			System.out.println("Opponent guessed "+ rowChar + columnNumb);
+    			opponent.askForGuess(randOne,randTwo,thePlayer);
+    			opponentisGuessing = false;
+    		}
+    		
+    	}
+    	
+    }
+    public void getGuess(String guess){
+    	if (guess.length() != 2 && guess.length() != 3){
+    		thePlayer.checkSynthax();
+    	}
+    	
+    	else{
+    		String firstChar = "" + guess.charAt(0);
+    		int rowNumb = thePlayer.convertToInt(firstChar);
+    		
+    		int colNumb = (Integer.parseInt(guess.replace(firstChar, "")) - 1);
+    		
+    		if (rowNumb < 0 || rowNumb > 9 || colNumb < 0 || colNumb > 9){
+    			thePlayer.checkSynthax();
+    		}
+    		
+    		else{
+        		if (opponent.playerGrid.alreadyGuessed(rowNumb, colNumb)){
+        			System.out.println("That space has already been guessed!");
+        		}
+        		else{
+        			thePlayer.askForGuess(rowNumb,colNumb,opponent);
+        			playerGuess = false;
+        		}
+    		}
+    		
+    	}
+    }
         
+    
+
 }

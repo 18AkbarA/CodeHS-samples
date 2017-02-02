@@ -1,15 +1,27 @@
 
 import java.util.*;
 
+
+
+
 public class Player
 {
+	public boolean showOutput = true;
     
     private static final int[] SHIP_LENGTHS = {2, 3, 4, 5};
     // Write your Player class here
+    public int hitShips = 0;
+    
     
     
     //Will be used for ship limits (1 for each except 3, which has 2)
 
+    public void displayText(String text){
+
+    	if(showOutput == true){
+    		System.out.println(text);
+    	}
+    }
    
     
     
@@ -23,14 +35,14 @@ public class Player
         
         
         if(shipLength != 2 && shipLength != 3 && shipLength != 4 && shipLength != 5){
-            System.out.println("Ship must have one of the following lengths: 2,3,4,5");
+            displayText("Ship must have one of the following lengths: 2,3,4,5");
         }
         else{
             
             if(shipLength == 2){
                 int twoshipnumb  = playerGrid.twoshipnumb;
                 if (twoshipnumb >= 1){
-                    System.out.println("WARNING: You can only have one ship with length 2!");
+                    displayText("WARNING: You can only have one ship with length 2!");
                     
                 }
                 else{
@@ -45,7 +57,7 @@ public class Player
             if(shipLength == 3){
                 int threeshipnumb = playerGrid.threeshipnumb;
                 if (threeshipnumb >= 2){
-                    System.out.println("WARNING: You can only have two ships with length 3!");
+                    displayText("WARNING: You can only have two ships with length 3!");
                     
                 }
                 else{
@@ -61,7 +73,7 @@ public class Player
                 int fourshipnumb = playerGrid.fourshipnumb;
                
                 if (fourshipnumb >= 1){
-                    System.out.println("WARNING: You can only have one ship with length 4!");
+                    displayText("WARNING: You can only have one ship with length 4!");
                     
                 }
                 else{
@@ -77,7 +89,7 @@ public class Player
             if(shipLength == 5){
                 int fiveshipnumb = playerGrid.fiveshipnumb;
                 if (fiveshipnumb >= 1){
-                    System.out.println("WARNING: You can only have one ship with length 5!");
+                    displayText("WARNING: You can only have one ship with length 5!");
                     
                 }
                 else{
@@ -96,27 +108,29 @@ public class Player
     
     
     
-    public void askForGuess(int row, int col){
-        if (opponentGrid.alreadyGuessed(row,col)){
-            System.out.println("That square is already guessed!");
+    public void askForGuess(int row, int col, Player opponent){
+        if (opponent.playerGrid.alreadyGuessed(row,col)){
+            displayText("That square is already guessed!");
             
         }
         
         else if (row > 9 || row < 0 || col > 9 || col < 0){
-            System.out.println("That square does not exist!");
+            displayText("That square does not exist!");
         }
         else{
             
-            boolean squareHasShip = opponentGrid.hasShip(row,col);
+            boolean squareHasShip = opponent.playerGrid.hasShip(row,col);
             
             if (squareHasShip){
-                System.out.println("Hit!");
+                displayText("Hit!");
                 
-                opponentGrid.markHit(row,col);
+                opponent.playerGrid.markHit(row,col);
+                
+                hitShips++;
             }
             else{
-                System.out.println("Miss!");
-                opponentGrid.markMiss(row,col);
+                displayText("Miss!");
+                opponent.playerGrid.markMiss(row,col);
             }
             
             
@@ -144,10 +158,10 @@ public class Player
     }
     
     public void checkSynthax(){
-        System.out.println("Please check your synthax!");
+        displayText("Please check your synthax!");
     }
     
-    public void askForGuess(String guess){
+    public void putDownShip(String guess){
         
         if(guess.indexOf(":") <= -1){
             checkSynthax();
@@ -155,7 +169,7 @@ public class Player
         else{
             String[] guessStrings = guess.split(":");
             
-            //System.out.println(guessStrings[0]);
+            //displayText(guessStrings[0]);
             
             int guessStringLength = guessStrings.length;
             int stringTwoLength = guessStrings[1].length();
@@ -200,7 +214,7 @@ public class Player
                 
             }
             
-            System.out.println("Current status:");
+            displayText("Current status:");
             printMyShips();
         }
     }
@@ -225,11 +239,11 @@ public class Player
 
 
         if(opponentGrid.alreadyGuessed(row,col)){
-            System.out.println("Square is already guessed!");
+            displayText("Square is already guessed!");
         }
         else{
             boolean theStatus = playerGrid.hasShip(row,col);
-            System.out.println(theStatus);
+            
             if(theStatus == true){
                 opponentGrid.markHit(row,col);   
             }

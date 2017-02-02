@@ -1,4 +1,5 @@
 
+
 public class Grid
 {
     // Write your Grid class here
@@ -9,6 +10,8 @@ public class Grid
 	
 	Each location will be represented as (row,col)
 	*/
+	
+	
 	
     private Location[][] grid = new Location[10][10];
     public int twoshipnumb = 0;
@@ -23,6 +26,22 @@ public class Grid
     
     public boolean shipWasAdded = true;
     //public int totalOpponentShips = 0;
+    
+    
+    public boolean showOutput = true;
+
+    public void displayText(String text){
+    	if(showOutput == true){
+    		System.out.println(text);
+    	}
+    }
+    public void displayTextInline(String text){
+    	if(showOutput == true){
+    		System.out.print(text);
+    	}
+    }
+    
+    
 	//Creates the grid and sets a location to every space;
     public Grid(){
         for(int row = 0; row < NUM_ROWS; row++){
@@ -39,7 +58,7 @@ public class Grid
 	/* Whenever you see the following if statement:
 	
 	        if (row > 9 || col > 9){
-				System.out.println("Parameters must be less than 9");
+				displayText("Parameters must be less than 9");
 			}
 		it's for checking to make sure the grid square actually exists
 	*/
@@ -47,7 +66,7 @@ public class Grid
 	//Marks the selected square with a hit
     public void markHit(int row, int col){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
         }
         
         else{
@@ -59,7 +78,7 @@ public class Grid
     //Marks the selected square with a miss
     public void markMiss(int row, int col){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
         }
         
         else{
@@ -71,7 +90,7 @@ public class Grid
 	//Sets the selected square's status
     public void setStatus(int row, int col, int status){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
         }
         else{
             Location theSpot = grid[row][col];
@@ -82,7 +101,7 @@ public class Grid
 	//Returns the selected square's status
     public int getStatus(int row, int col){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
             return 0;
         }
         else{
@@ -94,7 +113,7 @@ public class Grid
 	//Sets a ship in the selected square
     public void setShip(int row, int col, boolean val){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
         }
         else{
             Location theSpot = grid[row][col];
@@ -115,7 +134,7 @@ public class Grid
 	//Check if the selected square has a ship
     public boolean hasShip(int row, int col){
         if (row > 9 || col > 9){
-            System.out.println("Parameters must be less than 9");
+            displayText("Parameters must be less than 9");
             return false;
         }
         else{
@@ -144,17 +163,17 @@ public class Grid
 
 	
 		//Prints out the numbers on the top of the grid
-        System.out.print("");
+        displayTextInline(" ");
         for(int i = 1; i < 11; i++){
-            System.out.print(" " + i );
+            displayTextInline(" " + i );
         }
         
-        System.out.print("\n");
+        displayTextInline("\n");
         
         for (int i = 0; i < NUM_ROWS; i++){
 			//prints out the letters at the sides of the grid
             char startingchar = (char)(i + 65);
-            System.out.print(startingchar + "");
+            displayTextInline(startingchar + "");
             for (int l = 0; l < NUM_COLS; l++){
                 
                 Location theSquare = grid[i][l];
@@ -163,47 +182,47 @@ public class Grid
 				
 				//prints out the status for each
                 if (status == 0){
-                    System.out.print(" -");
+                    displayTextInline(" -");
                 }
                 else if (status == 1){
-                    System.out.print(" X");
+                    displayTextInline(" X");
                 }
                 else{
-                    System.out.print(" O");
+                    displayTextInline(" O");
                 }
                 
             }
-            System.out.print(" \n");
+            displayTextInline(" \n");
         }
         
     }
     
     public void printShips(){
         
-        System.out.print(" ");
+        displayTextInline(" ");
         for(int i = 1; i < 11; i++){
-            System.out.print(" " + i);
+            displayTextInline(" " + i);
         }
         
-        System.out.print("\n");
+        displayTextInline("\n");
         
         for (int i = 0; i < 10; i++){
             char startingchar = (char)(i + 65);
-            System.out.print(startingchar);
+            displayTextInline(""+startingchar);
             for (int l = 0; l < 10; l++){
                 
                 Location theSquare = grid[i][l];
                 boolean status = theSquare.hasShip();
                 //int status = 0;
                 if (status){
-                    System.out.print(" X");
+                    displayTextInline(" X");
                 }
                 else{
-                    System.out.print(" -");
+                    displayTextInline(" -");
                 }
                 
             }
-            System.out.print(" \n");
+            displayTextInline(" \n");
         }
         
     }
@@ -216,55 +235,59 @@ public class Grid
     public void addShip(Ship s){
         int shipLength = s.getLength();
         int shipDirection = s.getDirection();
-        //System.out.println(s.isLocationSet());
+        //displayText(s.isLocationSet());
         if (s.shipSet == false){
             boolean setShip = true;
         
             //Test if the ship will be placed on another ship
             if (shipDirection == 0){
-                    if(s.getCol() + shipLength > (NUM_COLS + 1)){
-                        //System.out.println("WARNING: The ship sticks off the grid!");
+                    if(s.getCol() + shipLength > (NUM_COLS)){
+                        //displayText("WARNING: The ship sticks off the grid!");
                     }
                     
                 else{
                     for(int i = 0; i < shipLength; i ++){
+                    	if (i + s.getCol() < 10){
                         Location shipLocation = grid[s.getRow()][s.getCol() + i];
                         if(shipLocation.hasShip()){
-                            System.out.println("A Ship already exists on one of those spaces!");
+                            displayText("A Ship already exists on one of those spaces!");
                             setShip = false;
                         }
+                    	}
                     }   
                 }
             }
         
             else if (shipDirection == 1){
-                if(s.getRow() + shipLength >= (NUM_ROWS)){
-                    System.out.println("WARNING: The ship sticks off the grid!");
+                if(s.getRow() + shipLength > (NUM_ROWS)){
+                    //displayText("WARNING: The ship sticks off the grid!");
                 }
                 else{
                     for(int i = 0; i < shipLength; i ++){
                     
 
-
+                    	if (i + s.getRow() < 10){
                         Location shipLocation = grid[s.getRow() + i][s.getCol()];
                         if(shipLocation.hasShip()){
-                            System.out.println("WARNING: A Ship already exists on one of those spaces!");
+                            displayText("WARNING: A Ship already exists on one of those spaces!");
                             setShip = false;
                         }
+                    	}
                     }
                 }
             }
         
-            if(shipDirection == 0 && s.getCol() + s.getLength() <= 11 && setShip){
+            if(shipDirection == 0 && s.getCol() + s.getLength() < 11 && setShip){
                 
                 for(int i = 0; i < shipLength; i ++){
+                	
                     Location shipLocation = grid[s.getRow()][s.getCol() + i];
                     shipLocation.setShip(true);
                     s.shipSet = true;
-                    
+                	
                     
                 }
-                System.out.println("Ship successfully added!");
+                displayText("Ship successfully added!");
                 totalShips++;
                 if(shipLength == 2){
                         twoshipnumb++;
@@ -280,16 +303,17 @@ public class Grid
                     }
             }
         
-            else if(shipDirection == 1 && s.getRow() + s.getLength() <= 11 && setShip){
+            else if(shipDirection == 1 && s.getRow() + s.getLength() < 11 && setShip){
                 
                 for(int i = 0; i < shipLength; i ++){
+                	
                     Location shipLocation = grid[s.getRow() + i][s.getCol()];
                     shipLocation.setShip(true);
                     s.shipSet = true;
-                    
+                	
                     
                 }
-                System.out.println("Ship successfully added!");
+                displayText("Ship successfully added!");
                     totalShips++;
                     
                     if(shipLength == 2){
@@ -306,7 +330,7 @@ public class Grid
                     }
             }
             else if (setShip != false){
-                System.out.println("WARNING: Your ship sticks off the grid!");
+                displayText("WARNING: Your ship sticks off the grid!");
 
             }
             else{
@@ -314,7 +338,7 @@ public class Grid
             }
         }
         else{
-            System.out.println("WARNING: That ship's location is already set!");
+            displayText("WARNING: That ship's location is already set!");
         }
         
     }
