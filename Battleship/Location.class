@@ -1,12 +1,16 @@
+//Written by Abdullah Akbar for his compsci class
 
 public class Location
 {
     //Implement the Location class here
     
+	
     public static final int UNGUESSED = 0;
     public static final int HIT = 1;
     public static final int MISSED = 2;
     
+    
+    public String ShipType = "";
     private int locationType;
     private boolean hasShip = false;
     
@@ -23,6 +27,13 @@ public class Location
         locationType = 2;
     }
     
+    public void setShipType(String shipType){
+    	ShipType = shipType;
+    }
+    
+    public String getShipType(){
+    	return this.ShipType;
+    }
     public boolean checkHit(){
         if (locationType == 1){
             return true;

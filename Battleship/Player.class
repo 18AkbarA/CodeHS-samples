@@ -1,4 +1,4 @@
-
+//Written by Abdullah Akbar for his compsci class
 import java.util.*;
 
 
@@ -12,6 +12,11 @@ public class Player
     // Write your Player class here
     public int hitShips = 0;
     
+    public int patrolHits = 0;
+    public int submarineHits = 0;
+    public int destroyerHits = 0;
+    public int battleshipHits = 0;
+    public int carrierHits = 0;
     
     
     //Will be used for ship limits (1 for each except 3, which has 2)
@@ -127,6 +132,48 @@ public class Player
                 opponent.playerGrid.markHit(row,col);
                 
                 hitShips++;
+                
+                
+                Location thesquare = opponent.playerGrid.get(row, col);
+                
+                String squareShip = thesquare.getShipType();
+               
+                if(squareShip.equals("patrolBoat")){
+                	
+                	patrolHits++;
+                	
+                	if(patrolHits == 2){
+                		System.out.println("Sunk a patrol boat! (length 2)");
+                	}
+                }
+                else if(squareShip.equals("submarine")){
+                	submarineHits++;
+                	
+                	if(submarineHits == 3){
+                		System.out.println("Sunk a submarine! (length 3)");
+                	}
+                }
+                else if(squareShip.equals("destroyer")){
+                	destroyerHits++;
+                	
+                	if(destroyerHits == 3){
+                		System.out.println("Sunk a destroyer! (length 3)");
+                	}
+                }
+                else if(squareShip.equals("battleship")){
+                	battleshipHits++;
+                	
+                	if(battleshipHits == 4){
+                		System.out.println("Sunk a battleship! (length 4)");
+                	}
+                }
+                else if(squareShip.equals("carrier")){
+                	carrierHits++;
+                	
+                	if(carrierHits == 5){
+                		System.out.println("Sunk a carrier! (length 5)");
+                	}
+                }
             }
             else{
                 displayText("Miss!");

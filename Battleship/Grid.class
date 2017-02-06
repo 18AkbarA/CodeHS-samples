@@ -1,4 +1,4 @@
-
+//Written by Abdullah Akbar for his compsci class
 
 public class Grid
 {
@@ -25,6 +25,7 @@ public class Grid
     public int totalShips = 0;
     
     public boolean shipWasAdded = true;
+    public int subSet = 0;
     //public int totalOpponentShips = 0;
     
     
@@ -285,7 +286,25 @@ public class Grid
                     shipLocation.setShip(true);
                     s.shipSet = true;
                 	
-                    
+                    if(shipLength == 2){
+                    	shipLocation.setShipType("patrolBoat");
+                    	
+                    }
+                    else if(shipLength == 3 && subSet < 3){
+                    	shipLocation.setShipType("submarine");
+                    	subSet++;
+                    	
+                    }
+                    else if(shipLength == 3){
+                    	shipLocation.setShipType("destroyer");
+                    	
+                    }
+                    else if(shipLength == 4){
+                    	shipLocation.setShipType("battleship");
+                    }
+                    else if (shipLength == 5){
+                    	shipLocation.setShipType("carrier");
+                    }
                 }
                 displayText("Ship successfully added!");
                 totalShips++;
@@ -310,7 +329,27 @@ public class Grid
                     Location shipLocation = grid[s.getRow() + i][s.getCol()];
                     shipLocation.setShip(true);
                     s.shipSet = true;
-                	
+                    
+                    if(shipLength == 2){
+                    	shipLocation.setShipType("patrolBoat");
+                    }
+                    else if(shipLength == 3 && subSet < 3){
+                    	shipLocation.setShipType("submarine");
+                    	subSet++;
+                    	
+                    }
+                    else if(shipLength == 3){
+                    	shipLocation.setShipType("destroyer");
+                    	
+                    }
+                    else if(shipLength == 4){
+                    	shipLocation.setShipType("battleship");
+                    	
+                    }
+                    else if (shipLength == 5){
+                    	shipLocation.setShipType("carrier");
+                    	
+                    }
                     
                 }
                 displayText("Ship successfully added!");

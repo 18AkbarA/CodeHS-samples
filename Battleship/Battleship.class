@@ -1,7 +1,9 @@
+//Written by Abdullah Akbar for his compsci class
+//Now gives message when ship is sunk! Advanced AI might be coming soon!
 
 import java.util.*;
 
-
+import java.util.*;
 
 import java.io.*;
 
@@ -157,19 +159,28 @@ public class Battleship
             }
         }
         
-    	delayTime(1000);
-    	System.out.println("It is time for you to guess now!");
     	
-    	System.out.println("Current opponent grid:");
-    	opponent.playerGrid.printStatus();
+
         while(guessStage){
         	
 
         	
         	while(playerGuess){
+        		delayTime(2000);
+            	System.out.println("It is time for you to guess now!");
+            	
+            	System.out.println("Current opponent grid:");
+            	opponent.playerGrid.printStatus();
         		String guess = readLine("Enter your guess:");
         		getGuess(guess);
-        	
+            	if(thePlayer.hitShips == 17){
+            		guessStage = false;
+            		playerWins();
+            	}
+            	else if(opponent.hitShips == 17){
+            		guessStage = false;
+            		opponentWins();
+            	}
 
         	}
     		System.out.println("Current opponent grid:");
