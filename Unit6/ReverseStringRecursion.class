@@ -1,0 +1,15 @@
+//Written by Abdullah Akbar for his compsci class
+public String reverse(String str)
+{
+       
+       String finalString = "";
+       int StrLength = str.length();
+       
+       for(int i = 0; i < StrLength - 1; i++){
+           int charNumb = StrLength - (1+ i);
+           finalString+= "" + str.charAt(charNumb);
+       }
+       
+       return finalString;
+       
+}
