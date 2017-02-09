@@ -1,0 +1,15 @@
+//Written by Abdullah Akbar for his compsci class
+public int search(ArrayList<String> list, String key)
+{
+    
+    int searchNumb = -1;
+    
+    for (int i = 0; i < list.size(); i++){
+        String theVal = list.get(i);
+        if(theVal.equals(key)){
+            searchNumb = i;
+        }
+    }
+    
+    return searchNumb;   
+}
